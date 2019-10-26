@@ -1,10 +1,23 @@
 const express = require('express');
 const authRoutes = require('./routes/auth-routes');
+const mongoose = require('mongoose');
+const keys = require('./config/keys');
+
 
 const app = express();
 
+
 // set up view engine
 app.set('view engine', 'ejs');
+
+// connect to mongodb
+
+mongoose.connect(keys.mongodb.dbURI, {
+    useNewUrlParser : true,
+    useUnifiedTopology: true
+}, ()=> {
+    console.log('connected to mongodb');
+});
 
 //set up routes
 app.use('/auth', authRoutes);
