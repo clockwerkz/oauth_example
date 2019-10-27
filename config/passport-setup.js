@@ -9,18 +9,25 @@ passport.use(
         callbackURL: '/auth/google/redirect',
         clientID: keys.google.clientID,
         clientSecret: keys.google.clientSecret
-    }, (accessToken, refreshToken, profile, done)=> {
+    }, async (accessToken, refreshToken, profile, done)=> {
         // passport cb function
-        new User({
-            username: profile.displayName,
-            googleId: profile.id
-        }).save()
-        .then((user)=> {
-            console.log(user);
-            done();
-        })
-        .catch(err => {
+        try 
+        {
+            const existingUser = await User.findOne({ googleId : profile.id });
+            if (existingUser) {
+                console.log(existingUser);
+            } else {
+                const user = await new User({
+                    username: profile.displayName,
+                    googleId: profile.id
+                });
+                console.log(user);
+                done();
+            }
+        }
+        catch(err) 
+        {
             console.log('Error:', err);
-        })
+        }
     })
 );

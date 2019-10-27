@@ -18,6 +18,7 @@ mongoose.connect(keys.mongodb.dbURI, {
 }, ()=> {
     console.log('connected to mongodb');
 });
+mongoose.set('useCreateIndex', true);
 
 //set up routes
 app.use('/auth', authRoutes);
