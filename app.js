@@ -1,5 +1,6 @@
 const express = require('express');
 const authRoutes = require('./routes/auth-routes');
+const profileRoutes = require('./routes/profile-routes');
 const mongoose = require('mongoose');
 const keys = require('./config/keys');
 const cookieSession = require('cookie-session');
@@ -32,6 +33,8 @@ mongoose.set('useCreateIndex', true);
 
 //set up routes
 app.use('/auth', authRoutes);
+
+app.use('/profile', profileRoutes);
 
 // create home route
 app.get('/', (req, res)=> {
