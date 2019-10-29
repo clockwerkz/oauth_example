@@ -29,9 +29,10 @@ passport.use(
             } else {
                 const user = await new User({
                     username: profile.displayName,
-                    googleId: profile.id
+                    googleId: profile.id,
+                    thumbnail: profile._json.picture
                 });
-                console.log(user);
+                await user.save();
                 done(null, user);
             }
         }

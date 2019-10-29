@@ -46,9 +46,10 @@
         <h1>Welcome to your profile, <%= user.username %></h1>
     </header>
     <main>
-        <p>
-            extra information about you.
-        </p>
+        <figure>
+            <img src="<%= user.thumbnail %>" />
+            <figcaption>Profile photo</figcaption>
+        </figure>
     </main>
 </body>
 </html>

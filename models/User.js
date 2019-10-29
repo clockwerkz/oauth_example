@@ -10,7 +10,11 @@ const UserSchema = new Schema({
         type: String,
         required: true,
         unique: true
-        }
+        },
+    thumbnail: {
+        type: String,
+        required: false
+    }
 });
 
 const User = mongoose.model('user', UserSchema);
