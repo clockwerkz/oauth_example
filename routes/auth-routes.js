@@ -4,7 +4,7 @@ require('../config/passport-setup');
 
 // auth login
 router.get('/login', (req,res)=> {
-    res.render('login');
+    res.render('login', {user: req.user});
 });
 
 // auth with google
@@ -17,9 +17,10 @@ router.get('/google/redirect', passport.authenticate('google'), (req, res)=> {
 });
 
 //auth logout 
-router.get('/logout', (res, req)=> {
+router.get('/logout', (req, res)=> {
     //handle with passport
-    res.send('logging out user');
+    req.logout();
+    res.redirect('/');
 });
 
 
